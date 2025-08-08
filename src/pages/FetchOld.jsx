@@ -29,13 +29,16 @@ const FetchOld = () => {
   //     queryFn: getTodosData, //useEffect
   //   });
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isPending, isError, error } = useQuery({
     queryKey: ["products"],
     queryFn: () => getProducts(),
   });
   console.log(data);
-  if (isLoading) {
+  if (isPending) {
     return <h1>Loading....</h1>;
+  }
+  if (isError) {
+    return <h1>{error.message || "Something went wrong"}</h1>;
   }
   return (
     <div>
